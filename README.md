@@ -1,6 +1,6 @@
 # Flight Ticket Estimator
 
-This application allows an user to estimate the ticket cost of a domestic flight in Australia. 
+This application allows an user to accurately estimate the ticket cost of a domestic flight in Australia. This is based on hypothetical flight scenarios which simulate a simplified flight price calculation engine where user inputs are passed in and an output of the Passenger Information, the number of seats taken and how many seats are left are written to a .txt file where the user is able to access their details in the outputted text file.
 
 # Design Considerations
 
