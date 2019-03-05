@@ -18,5 +18,6 @@ class Ticket
     end
 
     def ticket_payment()
+        
     end
 end
