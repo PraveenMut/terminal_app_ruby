@@ -1,41 +1,45 @@
 class PersonDetail
-    @array_of_destinations = ["Sydney", "Perth", "Brisbane", "Gold_Coast", "Cairns", "Canberra", "Adelaide"]
-    Sydney = {price: 200}
-    Perth = {price: 450}
-    Brisbane = {price: 120}
-    Gold_Coast = {price: 180}
-    Cairns = {price: 250}
-    Canberra = {price: 100}
-    Adelaide = {price: 110}
+    @@array_of_destinations = [
+    {destination: 'Sydney', price: 200}, 
+    {destination: 'Perth', price: 100}, 
+    {destination: 'Sydney', price: 450},
+    {destination: 'Gold_Coast', price: 560},
+    {destination: 'Cairns', price: 140}, 
+    {destination: 'Canberra', price: 400}, 
+    {destination: 'Adelaide', price: 150}
+    ]
     attr_accessor :name, :email
     def initialize(name)
         @name = name
         @email = ""
+        @weight = ""
+        @@city_destination = ""
     end
 
     def passenger_destination()
         puts "Where you want to travel"
         city_destination = gets().strip
-        array_of_destinations.each do |list|
-            if(city_destination == list)
-                return city_destination
-                else
-            end
-                puts "we dont have this option available for you"
+        if(@@array_of_destinations.include?(city_destination))
+            return @@city_destination
+        else
+            return "This option is not available"
         end
     end
-
-    def luggage_weight()
+    def luggage_weight(baggage_weight_integer)
+        if baggage_weight_integer > 7 && baggage_weight_integer < 30
+            return Sydney[:price]*1.5
+        else 
+            return 100
+        end
     end
-
-    def has_infant?()
+    def has_infant?(bool_infant_val)
+        if (bool_infant_val == 'Y' || bool_infant_val == 'y' || bool_infant_val == 'yes' || bool_infant_val == 'YES')
+            return true
+        elsif (bool_infant_val == 'n' || bool_infant_val == 'N' || bool_infant_val == 'NO' || bool_infant_val == 'No')
+            return false
+        end
     end
 end
 
-puts "Welcome to the Air Ticketing system. Please Enter your name"
-passenger_name = gets().strip
-passenger = PersonDetail.new(passenger_name)
-customer_name = passenger.name
-puts "Welcome #{customer_name}"
-available_option = customer_name.passenger_destination
-puts "#{available_option}"
+
+
