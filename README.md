@@ -8,20 +8,28 @@ This application allows an user to estimate the ticket cost of a domestic flight
 
 # Input Data Required
 
-- Example Test 2
+- Example Text 2
 
 # Usage of Program
 
-- Example Test 3
+- Example Text 3
 
 # Example
 
-- Example Test 4
+- Example Text 4
 
 # Trello
 
-- Example Test 5
+- Example Text 5
 
 # Slack
 
-- Example Test 6
+- Example Text 6
+
+# Issues
+
+- Example Text 7
+
+# Limitations
+
+- Example Text 8
