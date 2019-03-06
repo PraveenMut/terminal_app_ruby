@@ -1,3 +1,5 @@
+require 'csv'
+
 class Person
 	attr_accessor :name, :email, :number_of_persons
 	def initialize(name, email, number_of_persons)
@@ -69,20 +71,29 @@ def heavy_luggage_calc(price, user_response)
 end
 def calc_ticket_price(price, infant_response, luggage_response, return_response, passenger_quanity)
     total_price = travelling_with_infant(price, infant_response) + heavy_luggage_calc(price, luggage_response) + return_calc(price, return_response) + (passenger_quanity * price)
+    return total_price
     # return travelling_with_infant(price, infant_response), heavy_luggage_calc(price, luggage_response), return_calc(price, return_response), (passenger_quanity * price)
 end
+# def remaining_seats(hash_of_destination, number_of_passengers)
+#     seats_remaining = hash_of_destination[:seats] - number_of_passengers
+#     if (seats_remaining < 0)
+#         return false
+#     end
+#     hash_of_destination[:seats] = seats_remaining
+#     return hash_of_destination
+# end
 end
 
 
 
 #testing the engine for inputs
-# new_ticket_engine = TicketEngine.new()
+#new_ticket_engine = TicketEngine.new()
 # p new_ticket_engine.travelling_with_infant(200,"n")
 # p new_ticket_engine.return_calc(200,"return")
 # p new_ticket_engine.heavy_luggage_calc(200,1)
 # p new_ticket_engine.calc_ticket_price(200,"n",1,"return",1)
-
-
+# p new_ticket_engine.remaining_seats({destination: 'Sydney', price: 200, seats: 10}, 6)
+# p new_ticket_engine.array_of_destinations()
 # def write_to_file()
 # get the hash of passenger
 # get the hash of ticket
@@ -90,6 +101,23 @@ end
 # write to with a+ flag
 # close file
 
+
+
+def write_file(email_address, hashed_passenger)
+    filename = email_address + ".csv"
+    if(!File.exist?(filename))
+        CSV.open(filename,"a+",headers: hashed_passenger.keys()) do |csv|
+            csv << hashed_passenger.keys()
+            csv << hashed_passenger.values()
+        end
+    else
+        CSV.open(filename, "a", headers: hashed_passenger.keys()) do |csv|
+        csv << hashed_passenger.values()
+        end
+    end
+end
+
+# write_file("subtle.ops@gmail.com",{:name=>"praveen", :email=>"subtle.ops@gmail.com", :number_of_persons=>2,:price=>200})
 
 def main()
 	main_ticket_engine = TicketEngine.new()
@@ -113,9 +141,7 @@ def main()
         passenger_destination = gets().strip()
 	end
     destination_hash = main_ticket_engine.destination_validator(passenger_destination)
-    # p destination_hash
     price_of_destination = destination_hash[:price]
-    # p price_of_destination
 	print "Ok Great! Thanks for that\n"
 	print "Are you travelling with any infants?\n"
 	infant_response = gets().strip()
@@ -125,8 +151,13 @@ def main()
 	return_response = gets().strip()
     print "Whipping up the ticket for you!\n"
     total_price = main_ticket_engine.calc_ticket_price(price_of_destination, infant_response, luggage_response, return_response, hashed_passenger[:number_of_persons])
-    p total_price
-    # print "Thank you for booking a ticket with us!\nHave a safe flight!\nHope to see you again!\n"
+    hashed_passenger[:total_cost_price] = total_price
+    write_file(email_address, hashed_passenger)
+    print "-----------------------------\n"
+    print " \n"
+    print "Thank you for booking a ticket with us!\n\nYour tickets are in saved file under your email address!\n\nHave a safe flight!\n\nHope to see you again!\n\n"
+    print " \n"
+    print "-----------------------------\n"
 end
 
 main()
