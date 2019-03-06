@@ -13,18 +13,20 @@ class Person
 	end
 end
 
+####for testing####
 #praveen = Person.new('praveen','subtle.ops@gmail.com',2)
 #a_var = praveen.create_hash()
 #p a_var
 
 class TicketEngine
 	attr_accessor :array_of_destinations
-	attr_reader :infant_premium, :heavy_luggage_premium, :return_premium
+    attr_reader :infant_premium, :heavy_luggage_premium, :return_premium
+    @@num_seats = 0
 	def initialize()
 		@array_of_destinations = [
         {destination: 'Sydney', price: 200, seats: 10}, 
-        {destination: 'Perth', price: 100, seats: 10}, 
-        {destination: 'Sydney', price: 450, seats: 10},
+        {destination: 'Perth', price: 100, seats: 10},
+        {destination: 'Brisbane', price: 450, seats: 10},
         {destination: 'Gold_Coast', price: 560, seats: 10},
         {destination: 'Cairns', price: 140, seats: 10}, 
         {destination: 'Canberra', price: 400, seats: 10}, 
@@ -35,6 +37,7 @@ class TicketEngine
     @return_premium = 2
 end
 
+#Ask parents if infants are travelling with them and return new calculated price
 def travelling_with_infant(price, user_response)
     yes_responses = ["YES","yes","y","Yes","Y"]
     no_responses = ["NO","no","n","No","N"]
@@ -45,6 +48,7 @@ def travelling_with_infant(price, user_response)
     end
 end
 
+#Methods to check if they have entered right city and return boolean
 def destination_validator(user_response)
     found = @array_of_destinations.find {|hash| hash[:destination] == user_response}
     if(found)
@@ -53,15 +57,16 @@ def destination_validator(user_response)
         return false
     end
 end
-
+#Methods to take price and user response and return new calculated price (for infants)
 def return_calc(price, user_response)
-    if (user_response == "return" || user_response == "Return" || user_response == "RETURN")
+    if (user_response == "return" || user_response == "Return" || user_response == "RETURN" || user_response == "r" || user_response == "R")
         return (price * @return_premium) - price
     elsif (user_response == "one way" || user_response == "ONE WAY" || user_response == "One Way")
         return 0
     end
 end
 
+#Methods to take price and user response and return new calculated price (for luggage weight)
 def heavy_luggage_calc(price, user_response)
     if 7 < user_response && user_response < 30
         return (price * @heavy_luggage_premium) - price
@@ -69,11 +74,14 @@ def heavy_luggage_calc(price, user_response)
         return 0
     end
 end
+
+#Methods to take price and user response and return new calculated price (for luggage weight)
 def calc_ticket_price(price, infant_response, luggage_response, return_response, passenger_quanity)
     total_price = travelling_with_infant(price, infant_response) + heavy_luggage_calc(price, luggage_response) + return_calc(price, return_response) + (passenger_quanity * price)
     return total_price
     # return travelling_with_infant(price, infant_response), heavy_luggage_calc(price, luggage_response), return_calc(price, return_response), (passenger_quanity * price)
 end
+###problems arose with this method######
 # def remaining_seats(hash_of_destination, number_of_passengers)
 #     seats_remaining = hash_of_destination[:seats] - number_of_passengers
 #     if (seats_remaining < 0)
@@ -101,8 +109,7 @@ end
 # write to with a+ flag
 # close file
 
-
-
+#Method to write customer ticket in csv file
 def write_file(email_address, hashed_passenger)
     filename = email_address + ".csv"
     if(!File.exist?(filename))
@@ -119,6 +126,7 @@ end
 
 # write_file("subtle.ops@gmail.com",{:name=>"praveen", :email=>"subtle.ops@gmail.com", :number_of_persons=>2,:price=>200})
 
+#Main method
 def main()
 	main_ticket_engine = TicketEngine.new()
 	print "------------------------------------\n"
@@ -126,16 +134,20 @@ def main()
 	print "WELCOME TO THE AIR TICKET GENERATOR\n"
 	print " \n"
 	print "------------------------------------\n"
-	print "Hi, What's your name?\n"
+    print "Hi, What's your name?\n"
 	name_of_passenger = gets().strip()
 	print "Your email address?\n"
-	email_address = gets.strip()
-	print "Fantastic! Thanks for that. How many passengers are travelling?\n"
-	number_of_passengers = gets().strip().to_i
+    email_address = gets.strip()
+    while(!email_address.include?("@"))
+        print "Please enter correct email id \n"
+        email_address = gets.strip()
+    end
+    print "Fantastic! Thanks for that. How many passengers are travelling? Please enter integer value only\n"
+    number_of_passengers = gets().strip().to_i
 	passenger = Person.new(name_of_passenger, email_address, number_of_passengers)
 	hashed_passenger = passenger.create_hash()
 	print "Thanks. Where are you heading off to?\n"
-	passenger_destination = gets().strip()
+	passenger_destination = gets().strip().capitalize()
 	while(!main_ticket_engine.destination_validator(passenger_destination))
 		print "Sorry we don't have that destination at the moment!\n Please enter another destination\n"
         passenger_destination = gets().strip()
