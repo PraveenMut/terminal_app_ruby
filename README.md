@@ -27,24 +27,24 @@ The overall input data required for the program to function are:
 
 # Usage of Program
 
-- Example Text 3
+The usage of the program is guided by a friendly set of prompts which guide the user in the necessary inputs. Once the all of the necessary inputs are entered and are validated, the program will output the ticket with information described above.
 
-# Example
-
-- Example Text 4
 
 # Trello
 
-- Example Text 5
+<img src=./img/trello_screenshot.png>
 
 # Slack
 
-- Example Text 6
+<img src=./img/slack.png>
 
 # Issues
 
-- Example Text 7
+-  Pertient issues of extreme edge cases of entering unsantised errorenous inputs
 
 # Limitations
 
-- Example Text 8
+- User can only travel in certain cities in Australia
+- Passenger cannot carry weight more than 30kg
+- Passenger cannot book a meal in their ticket
+- Passenger cannot cancel the ticket once booked
