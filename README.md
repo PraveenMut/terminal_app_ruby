@@ -14,6 +14,9 @@ The Available destinations are most Australian Capital Cities: Sydney, Perth, Ad
 
 - The main class executes the main processes of the application, as a "front-end" and then stores the user inputs in relevant bindings for use in the calculation "Engine". The main function also calls an external write to csv method to write the results into a csv that is identified by their email address (which should for all intensive purposes should be an unique identifier). This stores the Customer's Name, Email Address, The Number of Passengers booked and the price of the ticket.
 
+Flowchart:
+<img src="https://github.com/pathakg028/terminal_app_ruby/blob/master/img/Project_flow.jpeg?raw=true">
+
 # Input Data Required
 
 The overall input data required for the program to function are:
@@ -29,7 +32,6 @@ The overall input data required for the program to function are:
 
 The usage of the program is guided by a friendly set of prompts which guide the user in the necessary inputs. Once the all of the necessary inputs are entered and are validated, the program will output the ticket with information described above.
 
-
 # Trello
 
 <img src=./img/trello_screenshot.png>
@@ -41,6 +43,7 @@ The usage of the program is guided by a friendly set of prompts which guide the 
 # Issues
 
 -  Pertient issues of extreme edge cases of entering unsantised errorenous inputs
+-  Seats were unable to be successfully be persisted correctly.
 
 # Limitations
 
