@@ -1,12 +1,13 @@
+@@array_of_destinations = [Sydney, Perth, Brisbane, Gold_Coast, Cairns, Canberra, Adelaide]
+$Sydney = {price: 200}
+$Perth = {price: 450}
+$Brisbane = {price: 120}
+$Gold_Coast = {price: 180}
+$Cairns = {price: 250}
+$Canberra = {price: 100}
+$Adelaide = {price: 110}
+
 class PersonDetail
-    @array_of_destinations = ["Sydney", "Perth", "Brisbane", "Gold_Coast", "Cairns", "Canberra", "Adelaide"]
-    Sydney = {price: 200}
-    Perth = {price: 450}
-    Brisbane = {price: 120}
-    Gold_Coast = {price: 180}
-    Cairns = {price: 250}
-    Canberra = {price: 100}
-    Adelaide = {price: 110}
     attr_accessor :name, :email
     def initialize(name)
         @name = name
